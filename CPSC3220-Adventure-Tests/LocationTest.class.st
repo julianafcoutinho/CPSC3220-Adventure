@@ -29,3 +29,14 @@ LocationTest >> testGivenALocationWithExitQueryExitInDirectionThenCorrectExitRet
 	
 	self assert: (southRoom exitInDirection: 'north') equals: northRoom
 ]
+
+{ #category : #tests }
+LocationTest >> testGivenALocationWithExitsWhenExitsListedThenAllExitDirectionsReturned [
+
+	| southRoom  |
+	southRoom := Location new.
+	southRoom addExit: Location new direction: 'north'.
+	southRoom addExit: Location new direction: 'south'.
+
+	self assert: southRoom exitNames equals: (Set with: 'north' with: 'south').
+]

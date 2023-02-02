@@ -32,5 +32,18 @@ Player >> initializeLocation: aLocation [
 { #category : #actions }
 Player >> look [
 
-	^location description
+	| ws |
+	ws := String new writeStream.
+	ws
+		nextPutAll: location description;
+		cr;
+		cr.
+	location exitNames
+		ifEmpty: [ ws nextPutAll: 'No exits' ]
+		ifNotEmpty: [ 
+			ws
+				nextPutAll: 'Exits:';
+				cr.
+			location exitNames do: [ :e | ws nextPutAll: e ] separatedBy: [ws nextPutAll: ', ' ]].
+	^ ws contents
 ]

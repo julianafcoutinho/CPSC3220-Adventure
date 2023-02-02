@@ -17,6 +17,21 @@ PlayerTest >> testGivenStartLocationWhenGoThenInNewLocation [
 ]
 
 { #category : #tests }
+PlayerTest >> testStartLocationWhenLookThenResultIncludesExitNames [
+
+	|  location player direction1 direction2 |
+	location := Location new
+		            description: 'north room';
+		            yourself.
+	location
+		addExit: Location new direction: (direction1 := 'up');
+		addExit: Location new direction: (direction2 := 'sideways').
+	player := Player location: location.
+	self assert: (player look includesSubstring: direction1).
+	self assert: (player look includesSubstring: direction2)
+]
+
+{ #category : #tests }
 PlayerTest >> testStartLocationWhenLookThenResultIncludesLocationDescription [
 
 	| description location player |

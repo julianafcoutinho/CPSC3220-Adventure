@@ -38,6 +38,12 @@ Location >> exitInDirection: aDirection [
 	
 ]
 
+{ #category : #exits }
+Location >> exitNames [
+
+	^ exits keys asSet
+]
+
 { #category : #initialization }
 Location >> initialize [
 
