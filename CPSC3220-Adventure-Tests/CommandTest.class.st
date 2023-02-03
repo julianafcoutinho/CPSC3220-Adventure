@@ -5,11 +5,23 @@ Class {
 }
 
 { #category : #tests }
-CommandTest >> testGivenSpaceSeparatedStringWhenParsedThenFirstWordAndArgumentsDetected [
+CommandTest >> testGivenGoCommandWhenExecutedGameSentGoWithDirection [
 
-	| command |
+	| command fake |
 	command := Command parse: 'go north'.
-	self assert: command commandWord equals: 'go'.
-	self assert: command argumentCount equals: 1.
-	self assert: command firstArgument equals: 'north'
+	command executeInGame: (fake := GameFake new).
+	self assert: fake commandsSent equals: 1.
+	self assert: fake lastCommandSent  equals: #go:.
+	self assert: fake lastArguments  equals: #( 'north' )
+]
+
+{ #category : #tests }
+CommandTest >> testGivenLookCommandWhenExecutedGameSentLookWithNoArguments [
+
+	| command fake |
+	command := Command parse: 'look'.
+	command executeInGame: (fake := GameFake new).
+	self assert: fake commandsSent equals: 1.
+	self assert: fake lastCommandSent equals: #look.
+	self assert: fake lastArguments equals: #(  )
 ]

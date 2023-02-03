@@ -1,3 +1,6 @@
+"
+Primary Pharo user interface for text-based adventure games.
+"
 Class {
 	#name : #GamePresenter,
 	#superclass : #SpPresenter,
@@ -14,7 +17,9 @@ GamePresenter >> commandEntered: aString [
 
 	| result |
 	result := game executeCommand: (Command parse: aString).
-	commandTextOutput text: commandTextOutput text , String cr , String cr, result
+	commandTextOutput text:
+		 result , String cr , String cr ,  commandTextOutput text.
+	commandTextInput text: ''
 ]
 
 { #category : #initialization }
@@ -22,9 +27,10 @@ GamePresenter >> defaultLayout [
 
 	layout := SpBoxLayout newTopToBottom.
 	layout
-		add: commandTextInput;
+		spacing: 5;
+		add: commandTextInput withConstraints: [ :c | c height: 40 ];
 		add: commandTextOutput.
-		^layout
+	^ layout
 ]
 
 { #category : #initialization }
@@ -44,4 +50,12 @@ GamePresenter >> initializePresenters [
 	commandTextInput whenSubmitDo: [:t |
 		self commandEntered: t].
 	commandTextOutput := self newText
+]
+
+{ #category : #initialization }
+GamePresenter >> initializeWindow: aWindow [
+
+	super initializeWindow: aWindow.
+	aWindow title: 'Skyrim'.
+	aWindow aboutText: 'A great game!'.
 ]

@@ -41,14 +41,30 @@ Game class >> startLocation: aLocation [
 { #category : #'command execution' }
 Game >> executeCommand: aCommand [
 
-	aCommand commandWord = 'look' ifTrue: [ ^ player look ].
-	aCommand commandWord = 'go' ifTrue: [ 
-		player go: aCommand firstArgument.
-		^player look ]
+	^aCommand executeInGame: self
+]
+
+{ #category : #'command execution' }
+Game >> go: aDirection [
+
+	player go: aDirection.
+	^player look
 ]
 
 { #category : #initialization }
 Game >> initializeStartLocation: aLocation [
 
 	player := Player location: aLocation
+]
+
+{ #category : #'command execution' }
+Game >> invalidCommand [
+
+	^'Invalid command'
+]
+
+{ #category : #'command execution' }
+Game >> look [
+
+	^player look
 ]

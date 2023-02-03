@@ -14,40 +14,25 @@ Class {
 { #category : #'instance creation' }
 Command class >> parse: aString [
 
-	| tokens |
+	| tokens commandClass |
 	tokens := aString substrings: ' '.
-	^ self new
-		  commandWord: tokens first;
+	commandClass := self allSubclasses
+		                detect: [ :each | each commandWord = tokens first ]
+		                ifNone: [ InvalidCommand ].
+	^ commandClass new
+		 
 		  arguments: tokens allButFirst;
 		  yourself
 ]
 
-{ #category : #accessing }
-Command >> argumentCount [
-
-	^arguments size
-]
-
-{ #category : #accessing }
+{ #category : #initialization }
 Command >> arguments: anObject [
 
 	arguments := anObject
 ]
 
-{ #category : #accessing }
-Command >> commandWord [
+{ #category : #executing }
+Command >> executeInGame: aGame [
 
-	^ commandWord
-]
-
-{ #category : #accessing }
-Command >> commandWord: anObject [
-
-	commandWord := anObject
-]
-
-{ #category : #accessing }
-Command >> firstArgument [
-
-	^arguments first
+	self subclassResponsibility
 ]
