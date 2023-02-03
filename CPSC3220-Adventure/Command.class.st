@@ -1,3 +1,6 @@
+"
+A command has a keyword (#commandWord) and a collection of 0 or more arguments.  For example, the string 'go west' corresponds to the commandWord 'go' and an arguments list of #('west').
+"
 Class {
 	#name : #Command,
 	#superclass : #Object,

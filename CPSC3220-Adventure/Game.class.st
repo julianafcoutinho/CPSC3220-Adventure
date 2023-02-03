@@ -1,3 +1,6 @@
+"
+An adventure game.  I start the player in a given location and can execute commands.
+"
 Class {
 	#name : #Game,
 	#superclass : #Object,

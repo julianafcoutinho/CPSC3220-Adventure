@@ -16,6 +16,19 @@ Player class >> location: aLocation [
 	^self new initializeLocation: aLocation
 ]
 
+{ #category : #private }
+Player >> describeExitsOn: ws [
+location exitNames
+		ifEmpty: [ ws nextPutAll: 'No exits' ]
+		ifNotEmpty: [ 
+			ws
+				nextPutAll: 'Exits:';
+				cr.
+			location exitNames
+				do: [ :e | ws nextPutAll: e ]
+				separatedBy: [ ws nextPutAll: ', ' ] ].
+]
+
 { #category : #actions }
 Player >> go: aDirection [
 
@@ -38,12 +51,6 @@ Player >> look [
 		nextPutAll: location description;
 		cr;
 		cr.
-	location exitNames
-		ifEmpty: [ ws nextPutAll: 'No exits' ]
-		ifNotEmpty: [ 
-			ws
-				nextPutAll: 'Exits:';
-				cr.
-			location exitNames do: [ :e | ws nextPutAll: e ] separatedBy: [ws nextPutAll: ', ' ]].
+	self describeExitsOn: ws.
 	^ ws contents
 ]
