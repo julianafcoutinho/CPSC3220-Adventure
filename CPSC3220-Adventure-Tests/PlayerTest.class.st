@@ -17,7 +17,7 @@ PlayerTest >> testGivenStartLocationWhenGoThenInNewLocation [
 ]
 
 { #category : #tests }
-PlayerTest >> testStartLocationWhenLookThenResultIncludesExitNames [
+PlayerTest >> testGivenStartLocationWhenLookThenResultIncludesExitNames [
 
 	|  location player direction1 direction2 |
 	location := Location new
@@ -32,7 +32,7 @@ PlayerTest >> testStartLocationWhenLookThenResultIncludesExitNames [
 ]
 
 { #category : #tests }
-PlayerTest >> testStartLocationWhenLookThenResultIncludesLocationDescription [
+PlayerTest >> testGivenStartLocationWhenLookThenResultIncludesLocationDescription [
 
 	| description location player |
 	location := Location new description: (description := 'north room'); yourself.
