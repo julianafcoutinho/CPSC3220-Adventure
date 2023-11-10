@@ -5,7 +5,8 @@ Class {
 	#name : #Game,
 	#superclass : #Object,
 	#instVars : [
-		'player'
+		'player',
+		'currentTime'
 	],
 	#category : #'CPSC3220-Adventure-Core'
 }
@@ -38,6 +39,18 @@ Game class >> startLocation: aLocation [
 	^self new initializeStartLocation: aLocation
 ]
 
+{ #category : #accessing }
+Game >> currentTime [
+
+	^ currentTime
+]
+
+{ #category : #accessing }
+Game >> currentTime: anObject [
+
+	currentTime := anObject
+]
+
 { #category : #'command execution' }
 Game >> executeCommand: aCommand [
 
@@ -47,6 +60,7 @@ Game >> executeCommand: aCommand [
 { #category : #'command execution' }
 Game >> go: aDirection [
 	[player go: aDirection.
+	
 	^player look]
 	on: UnknownDirection do: [ ^'That is not a valid direction. Please look again to find out where you can go.'].
 	
@@ -55,7 +69,8 @@ Game >> go: aDirection [
 { #category : #initialization }
 Game >> initializeStartLocation: aLocation [
 
-	player := Player location: aLocation
+	player := Player location: aLocation.
+	player currentTime: (Time hour: 12 minute:0 second: 0).
 ]
 
 { #category : #'command execution' }

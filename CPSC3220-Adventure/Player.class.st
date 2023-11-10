@@ -5,7 +5,8 @@ Class {
 	#name : #Player,
 	#superclass : #Object,
 	#instVars : [
-		'location'
+		'location',
+		'currentTime'
 	],
 	#category : #'CPSC3220-Adventure-Core'
 }
@@ -14,6 +15,18 @@ Class {
 Player class >> location: aLocation [
 
 	^self new initializeLocation: aLocation
+]
+
+{ #category : #accessing }
+Player >> currentTime [
+	
+	^currentTime
+]
+
+{ #category : #accessing }
+Player >> currentTime: anObject [
+
+	currentTime := anObject
 ]
 
 { #category : #private }
@@ -31,7 +44,8 @@ location exitNames
 
 { #category : #actions }
 Player >> go: aDirection [
-	[location := location exitInDirection: aDirection]
+	[location := location exitInDirection: aDirection.
+	self currentTime: (self currentTime addTime: 20 minutes).]
 	on: UnknownDirection do: [UnknownDirection signal ].
 ]
 
@@ -40,6 +54,18 @@ Player >> initializeLocation: aLocation [
 
 	location := aLocation.
 	
+]
+
+{ #category : #accessing }
+Player >> location [
+
+	^ location
+]
+
+{ #category : #accessing }
+Player >> location: anObject [
+
+	^ location := anObject
 ]
 
 { #category : #actions }
@@ -51,6 +77,12 @@ Player >> look [
 		nextPutAll: location description;
 		cr;
 		cr.
+	ws 	nextPutAll:  'The time is '.
+	ws nextPutAll: 
+	(self currentTime) printMinutes;
+	cr;
+	cr.
+	
 	self describeExitsOn: ws.
 	^ ws contents
 ]
