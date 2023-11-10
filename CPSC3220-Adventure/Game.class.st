@@ -46,9 +46,10 @@ Game >> executeCommand: aCommand [
 
 { #category : #'command execution' }
 Game >> go: aDirection [
-
-	player go: aDirection.
-	^player look
+	[player go: aDirection.
+	^player look]
+	on: UnknownDirection do: [ ^'That is not a valid direction. Please look again to find out where you can go.'].
+	
 ]
 
 { #category : #initialization }

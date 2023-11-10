@@ -31,8 +31,8 @@ location exitNames
 
 { #category : #actions }
 Player >> go: aDirection [
-
-	location := location exitInDirection: aDirection
+	[location := location exitInDirection: aDirection]
+	on: UnknownDirection do: [UnknownDirection signal ].
 ]
 
 { #category : #initialization }

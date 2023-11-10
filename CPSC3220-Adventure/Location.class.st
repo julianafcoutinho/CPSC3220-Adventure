@@ -33,7 +33,11 @@ Location >> description: anObject [
 { #category : #exits }
 Location >> exitInDirection: aDirection [
 
-	^exits at: aDirection
+(self exitNames includes: aDirection) 
+	ifTrue: 	[^exits at: aDirection]
+	ifFalse:  [UnknownDirection signal ] 
+
+	
 
 	
 ]

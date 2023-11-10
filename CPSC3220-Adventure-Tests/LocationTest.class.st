@@ -40,3 +40,12 @@ LocationTest >> testGivenALocationWithExitsWhenExitsListedThenAllExitDirectionsR
 
 	self assert: southRoom exitNames equals: (Set with: 'north' with: 'south').
 ]
+
+{ #category : #tests }
+LocationTest >> testGivenAnInvalidExitExceptionIsRaised [
+
+	| southRoom northRoom |
+	southRoom := Location new.
+	
+	self should: [southRoom exitInDirection: 'west'] raise: UnknownDirection 
+]
