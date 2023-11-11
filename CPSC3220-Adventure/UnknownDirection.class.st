@@ -1,3 +1,6 @@
+"
+Exception to be raised when the location entered by the user does not exist.
+"
 Class {
 	#name : #UnknownDirection,
 	#superclass : #Error,

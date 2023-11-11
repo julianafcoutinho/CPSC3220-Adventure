@@ -45,7 +45,7 @@ location exitNames
 { #category : #actions }
 Player >> go: aDirection [
 	[location := location exitInDirection: aDirection.
-	self currentTime: (self currentTime addTime: 20 minutes).]
+	]
 	on: UnknownDirection do: [UnknownDirection signal ].
 ]
 
@@ -80,6 +80,25 @@ Player >> look [
 	ws 	nextPutAll:  'The time is '.
 	ws nextPutAll: 
 	(self currentTime) printMinutes;
+	cr;
+	cr.
+	
+	self describeExitsOn: ws.
+	^ ws contents
+]
+
+{ #category : #actions }
+Player >> look: aTime [
+
+	| ws |
+	ws := String new writeStream.
+	ws
+		nextPutAll: location description;
+		cr;
+		cr.
+	ws 	nextPutAll:  'The time is '.
+	ws nextPutAll: 
+	(aTime) printMinutes;
 	cr;
 	cr.
 	

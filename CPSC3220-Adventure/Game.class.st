@@ -60,8 +60,8 @@ Game >> executeCommand: aCommand [
 { #category : #'command execution' }
 Game >> go: aDirection [
 	[player go: aDirection.
-	
-	^player look]
+	self currentTime: (self currentTime addTime: 20 minutes).
+	^player look: currentTime]
 	on: UnknownDirection do: [ ^'That is not a valid direction. Please look again to find out where you can go.'].
 	
 ]
@@ -70,7 +70,8 @@ Game >> go: aDirection [
 Game >> initializeStartLocation: aLocation [
 
 	player := Player location: aLocation.
-	player currentTime: (Time hour: 12 minute:0 second: 0).
+
+	self currentTime: (Time hour: 12 minute:0 second: 0).
 ]
 
 { #category : #'command execution' }
@@ -82,5 +83,6 @@ Game >> invalidCommand [
 { #category : #'command execution' }
 Game >> look [
 
-	^player look
+	
+	^player look: currentTime
 ]

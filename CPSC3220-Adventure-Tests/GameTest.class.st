@@ -5,6 +5,25 @@ Class {
 }
 
 { #category : #tests }
+GameTest >> testTimeChangesWhenGo [
+
+	|  location game result endDescription endLocation |
+	location := Location new
+		            description: 'neverland';
+		            yourself.
+	endLocation := Location new
+		               description: (endDescription := 'Mermaid place');
+		               yourself.
+	location addExit: endLocation direction: 'east'.
+	game := Game startLocation: location.
+	game currentTime: (Time hour:12 minute:0 second: 0).
+	result := game executeCommand: (Command parse: 'go east').
+	
+	
+	self assert: (game look includesSubstring: '12:20')
+]
+
+{ #category : #tests }
 GameTest >> testWhenGoExecutedThenDestinationRoomDescriptionIncluded [
 
 	|  location game result endDescription endLocation |
